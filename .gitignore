@@ -1,0 +1,39 @@
+# Virtual Environment
+venv/
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Environment variables
+.env
+.env.*
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Temporary files
+temp_file.py
+*.log
+
+# Operating system
+.DS_Store
+Thumbs.db
+
+# Raw datasets (if large)
+data/raw/
+
+
+# Database backups and local files
+*.sql.bak
+*.db
+*.sqlite3
+
+# Editor settings
+.vscode/
+.idea/
+
+# Temporary exports
+*.tmp
+*.bak
