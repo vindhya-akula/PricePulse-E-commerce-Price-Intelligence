@@ -88,6 +88,13 @@ Performed exploratory SQL analysis to investigate:
 - Compared product distributions across categories.
 - Identified catalog-level trends to support data-driven analysis.
 
+### 7. Explore the Power BI Dashboard
+
+- Open `powerbi/Pricepulse_Dashboard.pbix` using Power BI Desktop.
+- Configure the MySQL connection if required.
+- Refresh the dataset.
+- Explore the dashboard using interactive filters and visualizations.
+
 ## Key Analysis & Business Insights
 
 The analysis of 1,000 book listings across 50 categories revealed the following findings:
@@ -154,7 +161,7 @@ PricePulse-E-commerce-Price-Intelligence/
 │   └── pricepulsequeries.sql
 │
 ├── powerbi/
-│   └── Pricepulse Dashboard.pbix
+│   └── Pricepulse_Dashboard.pbix
 │
 ├── Screenshots/
 │   ├── Homepage.png
