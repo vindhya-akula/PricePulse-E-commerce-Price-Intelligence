@@ -3,11 +3,17 @@ from pathlib import Path
 import getpass
 import pandas as pd
 import mysql.connector
+import sys
 
 # 1. Locate the CSV file
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 CSV_PATH = BASE_DIR / "data" / "raw" / "books.csv"
 
+if not CSV_PATH.exists():
+    raise FileNotFoundError(
+        f"Dataset not found: {CSV_PATH}. "
+        "Run scraper.py first."
+    )
 
 def main():
     connection = None
@@ -47,10 +53,16 @@ def main():
             raise ValueError("CSV contains invalid ratings.")
 
         # 3. Convert timestamps to MySQL-compatible UTC datetimes
-        df["scraped_at"] = (
-            pd.to_datetime(df["scraped_at"], utc=True)
-            .dt.tz_localize(None)
+        df["scraped_at"] = pd.to_datetime(
+            df["scraped_at"],
+            utc=True,
+            errors="coerce"
         )
+
+        if df["scraped_at"].isna().any():
+            raise ValueError("CSV contains invalid timestamps.")
+
+        df["scraped_at"] = df["scraped_at"].dt.tz_localize(None)
 
         # 4. Convert rows into MySQL-compatible values
         rows = [
@@ -119,6 +131,7 @@ def main():
             print("Transaction rolled back.")
 
         print("An error occurred:", error)
+        sys.exit(1)
 
     finally:
         if cursor is not None:
